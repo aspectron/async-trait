@@ -339,7 +339,7 @@ pub fn async_trait(args: TokenStream, input: TokenStream) -> TokenStream {
 }
 
 #[proc_macro_attribute]
-pub fn async_trait_with_send(args: TokenStream, input: TokenStream) -> TokenStream {
+pub fn async_trait_without_send(args: TokenStream, input: TokenStream) -> TokenStream {
     let _ = parse_macro_input!(args as EmptyArgs);
     let args = Args{local: true};
     let mut item = parse_macro_input!(input as Item);
@@ -348,7 +348,7 @@ pub fn async_trait_with_send(args: TokenStream, input: TokenStream) -> TokenStre
 }
 
 #[proc_macro_attribute]
-pub fn async_trait_without_send(args: TokenStream, input: TokenStream) -> TokenStream {
+pub fn async_trait_with_send(args: TokenStream, input: TokenStream) -> TokenStream {
     let _ = parse_macro_input!(args as EmptyArgs);
     let args = Args{local: false};
     let mut item = parse_macro_input!(input as Item);
