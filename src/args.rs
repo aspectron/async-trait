@@ -34,3 +34,16 @@ fn error() -> Error {
     let msg = "expected #[async_trait] or #[async_trait(?Send)]";
     Error::new(Span::call_site(), msg)
 }
+
+#[derive(Copy, Clone)]
+pub struct EmptyArgs {}
+impl Parse for EmptyArgs {
+    fn parse(input: ParseStream) -> Result<Self> {
+        if input.is_empty(){
+            Ok(EmptyArgs{})
+        }else{
+            let msg = "expected #[async_trait_with_send] or #[async_trait_without_send]";
+            Err(Error::new(Span::call_site(), msg))
+        }
+    }
+}
