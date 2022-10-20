@@ -1,5 +1,5 @@
 [package]
-name = "async-trait"
+name = "workflow-async-trait"
 version = "0.1.58"
 authors = ["David Tolnay <dtolnay@gmail.com>"]
 categories = ["asynchronous", "no-std"]
