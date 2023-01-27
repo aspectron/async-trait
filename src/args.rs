@@ -39,9 +39,9 @@ fn error() -> Error {
 pub struct EmptyArgs {}
 impl Parse for EmptyArgs {
     fn parse(input: ParseStream) -> Result<Self> {
-        if input.is_empty(){
-            Ok(EmptyArgs{})
-        }else{
+        if input.is_empty() {
+            Ok(EmptyArgs {})
+        } else {
             let msg = "expected #[async_trait_with_send] or #[async_trait_without_send]";
             Err(Error::new(Span::call_site(), msg))
         }

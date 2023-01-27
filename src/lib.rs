@@ -324,7 +324,7 @@ mod lifetime;
 mod parse;
 mod receiver;
 
-use crate::args::{EmptyArgs, Args};
+use crate::args::{Args, EmptyArgs};
 use crate::expand::expand;
 use crate::parse::Item;
 use proc_macro::TokenStream;
@@ -342,7 +342,7 @@ pub fn async_trait(args: TokenStream, input: TokenStream) -> TokenStream {
 #[proc_macro_attribute]
 pub fn async_trait_without_send(args: TokenStream, input: TokenStream) -> TokenStream {
     let _ = parse_macro_input!(args as EmptyArgs);
-    let args = Args{local: true};
+    let args = Args { local: true };
     let mut item = parse_macro_input!(input as Item);
     expand(&mut item, args.local);
     TokenStream::from(quote!(#item))
@@ -351,7 +351,7 @@ pub fn async_trait_without_send(args: TokenStream, input: TokenStream) -> TokenS
 #[proc_macro_attribute]
 pub fn async_trait_with_send(args: TokenStream, input: TokenStream) -> TokenStream {
     let _ = parse_macro_input!(args as EmptyArgs);
-    let args = Args{local: false};
+    let args = Args { local: false };
     let mut item = parse_macro_input!(input as Item);
     expand(&mut item, args.local);
     TokenStream::from(quote!(#item))
