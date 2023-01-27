@@ -12,8 +12,13 @@ env:
   RUSTFLAGS: -Dwarnings
 
 jobs:
+  pre_ci:
+    uses: dtolnay/.github/.github/workflows/pre_ci.yml@master
+
   test:
     name: Rust ${{matrix.rust}}
+    needs: pre_ci
+    if: needs.pre_ci.outputs.continue
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -22,6 +27,7 @@ jobs:
         include:
           - rust: nightly
             rustflags: --cfg async_trait_nightly_testing
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@master
@@ -33,7 +39,10 @@ jobs:
 
   msrv:
     name: Rust 1.39.0
+    needs: pre_ci
+    if: needs.pre_ci.outputs.continue
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@1.39.0
@@ -43,6 +52,7 @@ jobs:
     name: Clippy
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request'
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@clippy
@@ -50,7 +60,10 @@ jobs:
 
   miri:
     name: Miri
+    needs: pre_ci
+    if: needs.pre_ci.outputs.continue
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@miri
@@ -62,6 +75,7 @@ jobs:
     name: Outdated
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request'
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/install@cargo-outdated
