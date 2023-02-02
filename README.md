@@ -6,6 +6,10 @@ Async trait methods
 [<img alt="docs.rs" src="https://img.shields.io/badge/docs.rs-async--trait-66c2a5?style=for-the-badge&labelColor=555555&logo=docs.rs" height="20">](https://docs.rs/async-trait)
 [<img alt="build status" src="https://img.shields.io/github/actions/workflow/status/dtolnay/async-trait/ci.yml?branch=master&style=for-the-badge" height="20">](https://github.com/dtolnay/async-trait/actions?query=branch%3Amaster)
 
+***
+This is a customized implementation of async trait that in addition to `async_trait` exports `async_trait_with_send` and `async_trait_without_send` attribute macros. This allows using `async_trait(?Send)` without the `?Send` qualifier, in-turn allowing use of `#cfg[]` conditional statements to alter between `Send` and `?Send` requirements based on features or platform architectures.
+***
+
 The initial round of stabilizations for the async/await language feature in Rust
 1.39 did not include support for async fn in traits. Trying to include an async
 fn in a trait produces the following error:
