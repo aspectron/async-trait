@@ -359,8 +359,8 @@ pub mod issue23 {
 // https://github.com/dtolnay/async-trait/issues/25
 #[cfg(async_trait_nightly_testing)]
 pub mod issue25 {
-    use crate::executor;
     use super::async_trait;
+    use crate::executor;
     use std::fmt::{Display, Write};
 
     #[async_trait]
@@ -503,8 +503,8 @@ pub mod issue44 {
 
 // https://github.com/dtolnay/async-trait/issues/45
 pub mod issue45 {
-    use crate::executor;
     use super::async_trait;
+    use crate::executor;
     use std::fmt::Debug;
     use std::sync::atomic::{AtomicU64, Ordering};
     use std::sync::{Arc, Mutex};
@@ -716,8 +716,8 @@ pub mod issue53 {
 // https://github.com/dtolnay/async-trait/issues/57
 #[cfg(async_trait_nightly_testing)]
 pub mod issue57 {
-    use crate::executor;
     use super::async_trait;
+    use crate::executor;
 
     #[async_trait]
     trait Trait {
@@ -1159,8 +1159,8 @@ pub mod issue134 {
 
 // https://github.com/dtolnay/async-trait/pull/125#pullrequestreview-491880881
 pub mod drop_order {
-    use crate::executor;
     use super::async_trait;
+    use crate::executor;
     use std::sync::atomic::{AtomicBool, Ordering};
 
     struct Flagger<'a>(&'a AtomicBool);
